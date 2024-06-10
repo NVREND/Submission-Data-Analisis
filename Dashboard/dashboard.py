@@ -104,7 +104,7 @@ max_date = df["dteday"].max()
 
 with st.sidebar:
     # Menambahkan logo perusahaan
-    st.image("bicycle.jpg")
+    #st.image("bicycle.jpg")
     
     # Mengambil start_date & end_date dari date_input
     start_date, end_date = st.date_input(
