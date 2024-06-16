@@ -1,7 +1,5 @@
 import pandas as pd
-import seaborn as sns
 import streamlit as st
-from babel.numbers import format_currency
 
 # Load cleaned data
 df = pd.read_csv('cleaned_hour.csv')
@@ -38,7 +36,7 @@ def create_seasonly_users_df(df):
     }, inplace=True)
 
     seasonly_users_df['season'] = pd.Categorical(seasonly_users_df['season'],
-                                             categories=['Springer', 'Summer', 'Fall', 'Winter'])
+                                             categories=['Spring', 'Summer', 'Fall', 'Winter'])
     
     seasonly_users_df = seasonly_users_df.sort_values('season')
     
@@ -138,26 +136,26 @@ with col3:
 st.markdown("---")
 
 st.subheader("Monthly Count of Bikeshare Users")
-st.line_chart(data=monthly_users_df.set_index('dateyears')[['total_users']], width=700, height=400)
-st.line_chart(data=monthly_users_df.set_index('dateyears')[['casual_users', 'registered_users']], width=700, height=400)
+st.line_chart(data=monthly_users_df.set_index('dateyears')[['total_users']])
+st.line_chart(data=monthly_users_df.set_index('dateyears')[['casual_users', 'registered_users']])
 st.markdown("---")
 
 st.subheader("Count Bikeshare Users by Season")
-st.bar_chart(data=seasonly_users_df.set_index('season')[['total_users']], width=700, height=400)
-st.bar_chart(data=seasonly_users_df.set_index('season')[['casual_users', 'registered_users']], width=700, height=400)
+st.bar_chart(data=seasonly_users_df.set_index('season')[['total_users']])
+st.bar_chart(data=seasonly_users_df.set_index('season')[['casual_users', 'registered_users']])
 st.markdown("---")
 
 st.subheader("Count Bikeshare Users by Weather")
-st.bar_chart(data=weatherly_users_df.set_index('weathersit')[['total_users']], width=700, height=400)
-st.bar_chart(data=weatherly_users_df.set_index('weathersit')[['casual_users', 'registered_users']], width=700, height=400)
+st.bar_chart(data=weatherly_users_df.set_index('weathersit')[['total_users']])
+st.bar_chart(data=weatherly_users_df.set_index('weathersit')[['casual_users', 'registered_users']])
 
 st.markdown(
     """
     ###### weathersit : 
-	1: Clear, Few clouds, Partly cloudy, Partly cloudy
-	2: Mist + Cloudy, Mist + Broken clouds, Mist + Few clouds, Mist
-	3: Light Snow, Light Rain + Thunderstorm + Scattered clouds, Light Rain + Scattered clouds
-	4: Heavy Rain + Ice Pallets + Thunderstorm + Mist, Snow + Fog
+    1: Clear, Few clouds, Partly cloudy, Partly cloudy
+    2: Mist + Cloudy, Mist + Broken clouds, Mist + Few clouds, Mist
+    3: Light Snow, Light Rain + Thunderstorm + Scattered clouds, Light Rain + Scattered clouds
+    4: Heavy Rain + Ice Pallets + Thunderstorm + Mist, Snow + Fog
 """
 )
 
